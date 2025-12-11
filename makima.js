@@ -45,7 +45,13 @@ const makimaArt = `
 `;
 
 
-const makimaGradient = gradient(['#ffffff', '#ff99cc', '#cc0000']);
+const makimaGradient = gradient([
+    '#ff6b57', // Рыжий (Макушка и волосы)
+    '#ffad85', // Светло-рыжий (Челка)
+    '#fff2cc', // Бледно-желтый (Глаза и кожа)
+    '#e6f2ff', // Холодный белый (Воротник рубашки)
+    '#636e72'  // Темно-серый (Галстук - не черный, чтобы было видно на фоне!)
+]);
 
 console.log(makimaGradient.multiline(makimaArt));
 
