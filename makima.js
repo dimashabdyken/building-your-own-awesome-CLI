@@ -55,4 +55,4 @@ const makimaGradient = gradient([
 
 console.log(makimaGradient.multiline(makimaArt));
 
-console.log(gradient.atlas("Ты ведь будешь хорошим песиком? (Y/n)"));ё
+console.log(gradient.atlas("Ты ведь будешь хорошим песиком? (Y/n)"));
