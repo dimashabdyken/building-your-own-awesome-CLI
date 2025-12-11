@@ -1,6 +1,10 @@
 #!/usr/bin/env node
-import gradient from 'gradient-string';
 
+import gradient from 'gradient-string';
+import inquirer from 'inquirer';
+import { createSpinner } from 'nanospinner';
+
+const sleep = (ms = 2000) => new Promise((r) => setTimeout(r, ms));
 
 const makimaArt = `
     @@@@@#55YYY5PPGGPGPGBBBBBGGP55PGPPPP5PGPGP5P&@@@@@@@@@@@@@@@
@@ -42,17 +46,57 @@ const makimaArt = `
     @@@@@@@Y.77!!~:      :JB&@@@@@@&BP?^.... ~@@#@@@@@@@@@@@@@@@
     @@@@@@@J :~!77~^:::..   :7Y??7~:.         G&@@@@@@@@@@@@@@@@
     @@@@@@@#^ .:!!?JJ??!~:   7#:              Y@@@@@@@@@@@@@@@@@              
-`;
-
+    `;
+    
 
 const makimaGradient = gradient([
-    '#ff6b57', // Рыжий (Макушка и волосы)
-    '#ffad85', // Светло-рыжий (Челка)
-    '#fff2cc', // Бледно-желтый (Глаза и кожа)
-    '#e6f2ff', // Холодный белый (Воротник рубашки)
-    '#636e72'  // Темно-серый (Галстук - не черный, чтобы было видно на фоне!)
+    '#ff6b57', 
+    '#ffad85', 
+    '#fff2cc', 
+    '#e6f2ff', 
+    '#636e72'  
 ]);
 
 console.log(makimaGradient.multiline(makimaArt));
 
-console.log(gradient.atlas("Ты ведь будешь хорошим песиком? (Y/n)"));
+
+async function askQuestion() {
+    console.clear();
+    console.log(makimaGradient.multiline(makimaArt));
+
+    const answers = await inquirer.prompt({
+        name: 'contract',
+        type: 'list', // Выбор из списка
+        message: 'are u ready to sign a contract?',
+        choices: [
+            'yes!',
+            'i refuse',
+            'who are u?'
+        ],
+    });
+
+    return handleAnswer(answers.contract == 'yes');
+}
+
+async function handleAnswer(isCorrect) {
+    const spinner = createSpinner('Checking for loyalty...').start();
+    await sleep();
+
+    if (isCorrect) {
+        spinner.success({ text: 'Good boy' });
+    } else {
+        spinner.error({ text: 'Wrong answer' });
+        console.log(gradient.passion('You are not worthy of Makima\'s attention. Goodbye.'));
+        process.exit(1); // Завершаем программу с кодом ошибки
+    }
+}
+
+askQuestion();
+
+
+
+
+
+
+
+
