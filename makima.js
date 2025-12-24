@@ -59,7 +59,6 @@ const makimaGradient = gradient([
 
 
 async function askQuestion() {
-    console.clear();
     console.log(makimaGradient.multiline(makimaArt));
 
     const answers = await inquirer.prompt({
