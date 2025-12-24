@@ -57,8 +57,6 @@ const makimaGradient = gradient([
     '#636e72'  
 ]);
 
-console.log(makimaGradient.multiline(makimaArt));
-
 
 async function askQuestion() {
     console.clear();
